@@ -10,5 +10,9 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
-      - name: brew audit
-        run: brew audit --strict Formula/workbench.rb Casks/elo.rb
+      - name: Tap local checkout
+        run: brew tap ccakes/tap "$GITHUB_WORKSPACE" --force
+      - name: Audit formula
+        run: brew audit --strict ccakes/tap/workbench
+      - name: Audit cask
+        run: brew audit --strict --cask ccakes/tap/elo
