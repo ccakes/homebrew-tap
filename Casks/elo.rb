@@ -1,8 +1,8 @@
 cask "elo" do
-  version "0.3.1"
-  sha256 "bef66ecd39a9a3ce7f48249c658bb0de4db10cadfe1b3708c0645c65517c373e"
+  version "0.4.0"
+  sha256 "9d61280c90111293b86dfaa7e842e528eadce3a4d5a635247d29005bcc8da10e"
 
-  url "https://github.com/ccakes/elo/releases/download/v#{version}/Elo-macos.app.zip"
+  url "https://github.com/ccakes/elo/releases/download/v#{version}/Elo_#{version}_universal.dmg"
   name "Elo"
   desc "Numi-compatible notepad calculator"
   homepage "https://github.com/ccakes/elo"
