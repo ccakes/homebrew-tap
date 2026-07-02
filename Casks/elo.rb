@@ -7,7 +7,7 @@ cask "elo" do
   desc "Numi-compatible notepad calculator"
   homepage "https://github.com/ccakes/elo"
 
-  depends_on macos: ">= :big_sur"
+  depends_on macos: :big_sur
 
   app "Elo.app"
 
