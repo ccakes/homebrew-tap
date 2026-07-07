@@ -129,7 +129,7 @@ bump_elo() {
   fi
 
   body=$(echo "$meta" | tail -n +2)
-  sha=$(echo "$body" | sha_for "Elo-macos.app.zip")
+  sha=$(echo "$body" | sha_for "Elo_${new_version}_universal.dmg")
 
   sed_version "$file" "$new_version"
   sed_single_sha "$file" "$sha"
