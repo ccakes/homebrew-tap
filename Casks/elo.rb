@@ -1,6 +1,6 @@
 cask "elo" do
-  version "0.4.0"
-  sha256 "9d61280c90111293b86dfaa7e842e528eadce3a4d5a635247d29005bcc8da10e"
+  version "0.4.2"
+  sha256 "92c4d81216ebf374c67667d849545f9d2c4aba984c1a3d3e060638dc05939f48"
 
   url "https://github.com/ccakes/elo/releases/download/v#{version}/Elo_#{version}_universal.dmg"
   name "Elo"
