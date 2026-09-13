@@ -1,28 +1,28 @@
 class Workbench < Formula
   desc "TUI process orchestrator for local development"
   homepage "https://github.com/ccakes/workbench"
-  version "0.7.0"
+  version "0.7.1"
   license "MIT"
 
   on_macos do
     on_arm do
       url "https://github.com/ccakes/workbench/releases/download/v#{version}/bench-darwin-arm64"
-      sha256 "e5ffc0fdefb3543ef443c22be5eadd9221b2059270a3769d0793258817c4beea"
+      sha256 "ef67cb8b0e37cc24c73efa0296641be904e2c9cec14ce2d7ebfd5e3c44ea484d"
     end
     on_intel do
       url "https://github.com/ccakes/workbench/releases/download/v#{version}/bench-darwin-amd64"
-      sha256 "82da3b2594bf048b3fc9fabf03a4ef199fd14f6ab85df270a7cb5a05010544d1"
+      sha256 "f6ac9dbaf5fe130d9f4305fe08b07f3f903d54f8e2548dc8d5f66f24d0ca20a1"
     end
   end
 
   on_linux do
     on_arm do
       url "https://github.com/ccakes/workbench/releases/download/v#{version}/bench-linux-arm64"
-      sha256 "64e904695b43a1a3331a156d7903832b938cd87efef9898504e3007eaa18fc94"
+      sha256 "6bacf213c3e6fe02af4a6c503217deae9b9c8d9ab2247c589506aeee63cebdbe"
     end
     on_intel do
       url "https://github.com/ccakes/workbench/releases/download/v#{version}/bench-linux-amd64"
-      sha256 "4957daf5b31a8b7f31708739a6191a98eb67f9d4a4c734cd3f58af6d0026cb13"
+      sha256 "6b8f6641a13fc3c6ac32bbe953e2413afc54eef20e13fd5e9e869bbabf5e3421"
     end
   end
 
