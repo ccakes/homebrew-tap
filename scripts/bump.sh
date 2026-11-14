@@ -2,7 +2,8 @@
 # Bump Formula/Cask files to the latest upstream GitHub release.
 #
 # Reads metadata via `gh release view --json tagName,assets`, then rewrites
-# `version "x.y.z"` and the matching `sha256 "..."` lines in place.
+# the version (`version "x.y.z"` for the cask, the url release tag for the
+# formula) and the matching `sha256 "..."` lines in place.
 #
 # For the formula, each sha256 line is matched against the asset filename
 # in the preceding `url ".../<asset>"` line (two-line awk window), so the
@@ -35,6 +36,15 @@ sha_for() {
 sed_version() {
   local file="$1" new="$2"
   sed -i.bak -E "s/^([[:space:]]*version[[:space:]]+)\"[^\"]+\"/\1\"${new}\"/" "$file"
+  rm -f "${file}.bak"
+}
+
+# For formula files: rewrite the release tag in every url, since the
+# formula has no `version` line (audit flags it as redundant with the url).
+# e.g. .../download/v0.7.1/bench-darwin-arm64 -> .../download/v0.7.2/...
+sed_url_version() {
+  local file="$1" new="$2"
+  sed -i.bak -E "s|/download/v[^/]+/|/download/v${new}/|" "$file"
   rm -f "${file}.bak"
 }
 
@@ -87,6 +97,13 @@ current_version() {
     | sed -E 's/.*"([^"]+)".*/\1/'
 }
 
+# For formula files: version from the first url's release tag.
+url_version() {
+  grep -E '^[[:space:]]*url[[:space:]]+"' "$1" \
+    | head -n 1 \
+    | sed -E 's|.*/download/v([^/]+)/.*|\1|'
+}
+
 bump_workbench() {
   local file="Formula/workbench.rb"
   local meta tag new_version
@@ -94,7 +111,7 @@ bump_workbench() {
   tag=$(echo "$meta" | head -n 1)
   new_version="${tag#v}"
 
-  if [ "$(current_version "$file")" = "$new_version" ]; then
+  if [ "$(url_version "$file")" = "$new_version" ]; then
     echo "up-to-date: $file ($new_version)"
     return 0
   fi
@@ -106,7 +123,7 @@ bump_workbench() {
   sha_linux_arm=$(echo "$body"  | sha_for "bench-linux-arm64")
   sha_linux_amd=$(echo "$body"  | sha_for "bench-linux-amd64")
 
-  sed_version "$file" "$new_version"
+  sed_url_version "$file" "$new_version"
   bump_formula_shas "$file" \
     "bench-darwin-arm64=$sha_darwin_arm" \
     "bench-darwin-amd64=$sha_darwin_amd" \
