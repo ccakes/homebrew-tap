@@ -15,6 +15,6 @@ jobs:
       - name: Trust tap
         run: brew trust --tap ccakes/tap
       - name: Audit formula
-        run: brew audit ccakes/tap/workbench
+        run: brew audit --strict ccakes/tap/workbench
       - name: Audit cask
         run: brew audit --strict --cask ccakes/tap/elo
